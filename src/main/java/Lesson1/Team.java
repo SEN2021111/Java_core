@@ -9,10 +9,10 @@ public class Team {
         this.members = members;
     }
 
-    public void infoPassed() {
+    public void infoPassed(int a) {
         for (int i = 0; i < members.length; i++) {
-            if (members[i].tall > 40) {
-                System.out.println(members[i].name + " прошел дистанцию");
+            if (members[i].getPower() > a) {
+                System.out.println(members[i].getName() + " прошел дистанцию");
             }
         }
     }
