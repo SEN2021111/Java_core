@@ -4,51 +4,60 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestWriteCSV {
-    private String[] header;
-    private List<String> data;
+    private List<String> header;
+    private List<List<String>> data;
     private String pathToFile;
     private BufferedWriter writer;
 
     public TestWriteCSV(String pathToFile) {
         this.pathToFile = pathToFile;
-        data = new ArrayList();
+        data = new ArrayList<>();
     }
 
-    public String[] getHeader() {
+    public List<String> getHeader() {
         return header;
     }
 
     public void setHeader(String[] header) {
-        this.header = header;
+        this.header = Arrays.asList(header);
     }
 
     public void addRecord(String[] record) {
-        data.add(stringListToString(record));
+        this.data.add(Arrays.asList(record));
     }
 
-    public List<String> getData() {
+    public List<List<String>> getData() {
         return data;
+    }
+
+    private void writeRecord(BufferedWriter wr, List<String> rec) throws IOException {
+        wr.write(stringListToString(rec));
+        wr.newLine();
     }
 
     public void save() throws IOException {
         writer = new BufferedWriter(new FileWriter(pathToFile));
-        writer.write(stringListToString(header));
-        writer.newLine();
+        writeRecord(writer, header);
 
-        for (int i = 0; i < data.size(); i++) {
-            writer.write(data.get(i).toString());
-            writer.newLine();
-        }
+        data.forEach(rec -> {
+            try {
+                writeRecord(writer, rec);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         writer.flush();
         writer.close();
     }
 
-    private String stringListToString(String[] list) {
+    private String stringListToString(List<String> list) {
         String result = "";
-        for (String s : list) result += s + ";";
-        return result;
+        for (String s : list) result += ";" + s;
+        return result.substring(1);
     }
 }
