@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccuWeather {
@@ -45,7 +46,7 @@ public class AccuWeather {
         return firstCity.getString("Key");
     }
 
-    public List<WeatherResponse> getWeatherByCity(String city) throws IOException {
+    public List<Weather> getWeatherByCity(String city) throws IOException {
         String cityKey = getCityKey(city);
         URL url = new HttpUrl.Builder()
                 .scheme("http")
@@ -68,8 +69,24 @@ public class AccuWeather {
         JSONArray dailyForecasts = new JSONObject(responseJSON).getJSONArray("DailyForecasts");
 
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(
-                dailyForecasts.toString(), new TypeReference<List<WeatherResponse>>() {
-                });
+
+        List<WeatherResponse> response =
+                objectMapper.readValue(
+                        dailyForecasts.toString(), new TypeReference<List<WeatherResponse>>() {
+                        });
+
+        List<Weather> result = new ArrayList();
+        response.forEach(x -> {
+            Weather weather = new Weather(
+                    this.cityName
+                    , x.getDate()
+                    , x.getDayPhrase()
+                    , x.getNightPhrase()
+                    , x.getMinTemperature()
+                    , x.getMaxTemperature()
+            );
+            result.add(weather);
+        });
+        return result;
     }
 }
