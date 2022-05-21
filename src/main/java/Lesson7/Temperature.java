@@ -18,11 +18,11 @@ public class Temperature {
         this.maximum = maximum;
     }
 
-    public float getMinimum() {
+    public long getMinimum() {
         return minimum.getValueCelsius();
     }
 
-    public float getMaximum() {
+    public long getMaximum() {
         return maximum.getValueCelsius();
     }
 }

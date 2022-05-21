@@ -8,12 +8,12 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Extremum {
 
-    private float value;
+    private long value;
     private String unit;
 
     @JsonSetter("Value")
     private void setValue(String value) {
-        this.value = Float.parseFloat(value);
+        this.value = Long.parseLong(value);
     }
 
     @JsonSetter("Unit")
@@ -21,7 +21,7 @@ public class Extremum {
         this.unit = unit;
     }
 
-    public float getValueCelsius() {
+    public long getValueCelsius() {
         if(Objects.equals(unit, "F")){
             return Math.round((value - 32) * 5/9);
         }
