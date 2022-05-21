@@ -14,13 +14,6 @@ public class Homework7 {
         city2.forEach(x -> System.out.println(x.toString()));
 
         AccuWeatherRepository rep = new AccuWeatherRepository();
-        city1.forEach(x -> rep.insert(
-                 x.cityName
-                ,x.date
-                ,x.dayPhrase
-                ,x.nightPhrase
-                ,x.minTemperature
-                ,x.maxTemperature
-        ));
+        city1.forEach(x -> rep.insert(x));
     }
 }

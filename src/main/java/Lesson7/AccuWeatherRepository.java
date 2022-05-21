@@ -41,12 +41,7 @@ public class AccuWeatherRepository {
     }
 
     public void insert(
-            String city
-            , java.util.Date localDate
-            , String dayPhrase
-            , String nightPhrase
-            , long minTemperature
-            , long maxTemperature) {
+            Weather weather) {
         String sql =
                 "INSERT INTO weather(" +
                         " city," +
@@ -57,16 +52,16 @@ public class AccuWeatherRepository {
                         " maxTemperature" +
                         ") " +
                         "VALUES(?,?,?,?,?,?)";
-        java.sql.Date sqlDate = new java.sql.Date(localDate.getTime());
+        java.sql.Date sqlDate = new java.sql.Date(weather.date.getTime());
         try {
             Connection conn = this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, city);
+            pstmt.setString(1, weather.cityName);
             pstmt.setDate(2, sqlDate);
-            pstmt.setString(3, dayPhrase);
-            pstmt.setString(4, nightPhrase);
-            pstmt.setLong(5, minTemperature);
-            pstmt.setLong(6, maxTemperature);
+            pstmt.setString(3, weather.dayPhrase);
+            pstmt.setString(4, weather.nightPhrase);
+            pstmt.setLong(5, weather.minTemperature);
+            pstmt.setLong(6, weather.maxTemperature);
             pstmt.executeUpdate();
             connect().close();
         } catch (SQLException e) {
