@@ -10,10 +10,17 @@ public class Homework7 {
         List<Weather> city1 = aw.getWeatherByCity("Лондон");
         List<Weather> city2 = aw.getWeatherByCity("Париж");
 
-        city1.forEach(x -> System.out.println(x.toString()));
-        city2.forEach(x -> System.out.println(x.toString()));
+        //city1.forEach(x -> System.out.println(x.toString()));
+        //city2.forEach(x -> System.out.println(x.toString()));
 
         AccuWeatherRepository rep = new AccuWeatherRepository();
-        city1.forEach(x -> rep.insert(x));
+        city1.forEach(rep::insert);
+        System.out.println("--Записи из БД с фильтром--");
+        rep.select("Лондон").forEach(x -> System.out.println(x.toString()));
+        rep.select("Париж").forEach(x -> System.out.println(x.toString()));
+
+        rep.insertBatch(city2);
+        System.out.println("--Все записи из БД--");
+        rep.selectAll().forEach(x -> System.out.println(x.toString()));
     }
 }

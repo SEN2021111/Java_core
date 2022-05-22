@@ -8,16 +8,16 @@ public class Weather {
     public Date date;
     public String dayPhrase;
     public String nightPhrase;
-    public long minTemperature;
-    public long maxTemperature;
+    public int minTemperature;
+    public int maxTemperature;
 
     public Weather(
             String cityName,
             Date date,
             String dayPhrase,
             String nightPhrase,
-            long minTemperature,
-            long maxTemperature) {
+            int minTemperature,
+            int maxTemperature) {
         this.cityName = cityName;
         this.date = date;
         this.dayPhrase = dayPhrase;
@@ -30,7 +30,7 @@ public class Weather {
     public String toString() {
         return String.format("В г.%s на дату %s, днем - %s, ночью - %s, температура от %s до %s градусов цельсия"
                 , this.cityName
-                , new SimpleDateFormat("dd.mm.yyyy").format(this.date)
+                , new SimpleDateFormat("dd.MM.yyyy").format(this.date)
                 , this.dayPhrase
                 , this.nightPhrase
                 , this.minTemperature
