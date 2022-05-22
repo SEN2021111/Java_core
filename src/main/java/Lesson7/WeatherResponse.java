@@ -40,13 +40,11 @@ public class WeatherResponse {
         return date;
     }
 
-    public long getMinTemperature() {
-        return temperature.getMinimum();
+    public int getMinTemperature() {
+        return (int) temperature.getMinimum();
     }
 
-    public long getMaxTemperature() {
-        return temperature.getMaximum();
-    }
+    public int getMaxTemperature() { return (int) temperature.getMaximum(); }
 
     public String getDayPhrase() {
         return day.getPhrase();
