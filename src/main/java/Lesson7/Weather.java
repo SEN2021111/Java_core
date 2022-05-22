@@ -1,0 +1,40 @@
+package Lesson7;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Weather {
+    public String cityName;
+    public Date date;
+    public String dayPhrase;
+    public String nightPhrase;
+    public int minTemperature;
+    public int maxTemperature;
+
+    public Weather(
+            String cityName,
+            Date date,
+            String dayPhrase,
+            String nightPhrase,
+            int minTemperature,
+            int maxTemperature) {
+        this.cityName = cityName;
+        this.date = date;
+        this.dayPhrase = dayPhrase;
+        this.nightPhrase = nightPhrase;
+        this.minTemperature = minTemperature;
+        this.maxTemperature = maxTemperature;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("В г.%s на дату %s, днем - %s, ночью - %s, температура от %s до %s градусов цельсия"
+                , this.cityName
+                , new SimpleDateFormat("dd.MM.yyyy").format(this.date)
+                , this.dayPhrase
+                , this.nightPhrase
+                , this.minTemperature
+                , this.maxTemperature
+        );
+    }
+}
