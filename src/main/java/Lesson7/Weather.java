@@ -8,16 +8,15 @@ public class Weather {
     public Date date;
     public String dayPhrase;
     public String nightPhrase;
-    public int minTemperature;
-    public int maxTemperature;
-
+    public long minTemperature;
+    public long maxTemperature;
     public Weather(
             String cityName,
             Date date,
             String dayPhrase,
             String nightPhrase,
-            int minTemperature,
-            int maxTemperature) {
+            long minTemperature,
+            long maxTemperature) {
         this.cityName = cityName;
         this.date = date;
         this.dayPhrase = dayPhrase;
