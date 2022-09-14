@@ -10,6 +10,7 @@ public class Weather {
     public String nightPhrase;
     public long minTemperature;
     public long maxTemperature;
+
     public Weather(
             String cityName,
             Date date,
